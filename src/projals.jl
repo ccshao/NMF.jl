@@ -32,9 +32,9 @@ mutable struct ProjectedALS{T}
     end
 end
 
-solve!(alg::ProjectedALS, X, W, H) =
+solve!(alg::ProjectedALS, X, W, H, init, alg) =
     nmf_skeleton!(ProjectedALSUpd(alg.lambda_w, alg.lambda_h),
-                  X, W, H, alg.maxiter, alg.verbose, alg.tol)
+                  X, W, H, alg.maxiter, alg.verbose, alg.tol, init, alg)
 
 
 struct ProjectedALSUpd{T} <: NMFUpdater{T}

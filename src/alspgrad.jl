@@ -388,9 +388,9 @@ struct ALSPGradUpd{T} <: NMFUpdater{T}
     tolg::T
 end
 
-solve!(alg::ALSPGrad, X, W, H) =
+solve!(alg::ALSPGrad, X, W, H, init, alg) =
     nmf_skeleton!(ALSPGradUpd(alg.maxsubiter, alg.tolg),
-                  X, W, H, alg.maxiter, alg.verbose, alg.tol)
+                  X, W, H, alg.maxiter, alg.verbose, alg.tol, init, alg)
 
 
 struct ALSPGradUpd_State{T}
@@ -423,4 +423,3 @@ function update_wh!(upd::ALSPGradUpd, s::ALSPGradUpd_State, X, W, H)
     # update WH
     mul!(s.WH, W, H)
 end
-

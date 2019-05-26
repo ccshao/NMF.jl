@@ -24,12 +24,14 @@ struct Result{T}
     niters::Int
     converged::Bool
     objvalue::T
+    init::AbstractString
+    alg::AbstractString
 
-    function Result{T}(W::Matrix{T}, H::Matrix{T}, niters::Int, converged::Bool, objv) where T
+    function Result{T}(W::Matrix{T}, H::Matrix{T}, niters::Int, converged::Bool, objv, init::AbstractString, alg::AbstractString) where T
         if size(W, 2) != size(H, 1)
             throw(DimensionMismatch("Inner dimensions of W and H mismatch."))
         end
-        new{T}(W, H, niters, converged, objv)
+        new{T}(W, H, niters, converged, objv, init, alg)
     end
 end
 
@@ -39,7 +41,7 @@ abstract type NMFUpdater{T} end
 
 function nmf_skeleton!(updater::NMFUpdater{T},
                        X, W::Matrix{T}, H::Matrix{T},
-                       maxiter::Int, verbose::Bool, tol) where T
+                       maxiter::Int, verbose::Bool, tol, init::AbstractString, alg::AbstractString) where T
     objv = convert(T, NaN)
 
     # init
@@ -81,5 +83,5 @@ function nmf_skeleton!(updater::NMFUpdater{T},
     if !verbose
         objv = evaluate_objv(updater, state, X, W, H)
     end
-    return Result{T}(W, H, t, converged, objv)
+    return Result{T}(W, H, t, converged, objv, init, alg)
 end

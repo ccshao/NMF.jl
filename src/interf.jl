@@ -40,5 +40,5 @@ function nnmf(X::AbstractMatrix{T}, k::Integer;
     end
 
     # run optimization
-    solve!(alginst, X, W, H)
+    solve!(alginst, X, W, H, string(init), string(alg))
 end
