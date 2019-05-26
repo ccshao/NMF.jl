@@ -28,12 +28,12 @@ mutable struct MultUpdate{T}
     end
 end
 
-function solve!(alg::MultUpdate, X, W, H, init, alg)
+function solve!(alg::MultUpdate, X, W, H, nmfinit, nmfalg)
 
     if alg.obj == :mse
-        nmf_skeleton!(MultUpdMSE(alg.lambda), X, W, H, alg.maxiter, alg.verbose, alg.tol, init, alg)
+        nmf_skeleton!(MultUpdMSE(alg.lambda), X, W, H, alg.maxiter, alg.verbose, alg.tol, nmfinit, nmfalg)
     else # alg == :div
-        nmf_skeleton!(MultUpdDiv(alg.lambda), X, W, H, alg.maxiter, alg.verbose, alg.tol, init, alg)
+        nmf_skeleton!(MultUpdDiv(alg.lambda), X, W, H, alg.maxiter, alg.verbose, alg.tol, nmfinit, nmfalg)
     end
 end
 
