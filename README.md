@@ -5,6 +5,10 @@ A Julia package for non-negative matrix factorization (NMF).
 [![Build Status](https://travis-ci.org/JuliaStats/NMF.jl.svg?branch=master)](https://travis-ci.org/JuliaStats/NMF.jl)
 [![Coverage Status](https://coveralls.io/repos/github/JuliaStats/NMF.jl/badge.svg?branch=master)](https://coveralls.io/github/JuliaStats/NMF.jl?branch=master)
 
+---
+**Note::** This branch use the original nndsvd method. See https://github.com/JuliaStats/NMF.jl/issues/32. The implementation of 
+NNDSVD in master will leads a larger H.
+
 ---------------------------
 
 ## Development Status
